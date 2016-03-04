@@ -1,0 +1,89 @@
+void direction(int, int);
+	private: System::Void MyForm_Load(System::Object^  sender, System::EventArgs^  e) {
+	}
+			void buttonmaker();
+			 
+			 
+	};
+	bool access()
+	{
+
+	}
+
+	void position()
+	{
+		int col, row;
+
+
+
+	}
+
+ void direction(int, int){
+	 char north = '8', south = '2', east = '6', west = '4';
+	 char startdirection;
+
+	 std::cin >> startdirection;
+
+	 if (startdirection == north && access() == true)
+	 {
+		 gonorth();
+
+	 }
+	 else if (startdirection == west && access() == true) {
+		 gowest();
+	 }
+	 else if (startdirection == south && access() == true)
+	 {
+		 gosouth();
+
+	 }
+	 else if (startdirection == east && access() == true)
+	 {
+		 goeast();
+
+	 }
+	 else
+	 {
+		 MessageBox::Show("New direction");
+
+	 }
+
+	 /*switch (startdirection)
+	 {
+	 case '8':
+		 world->getrobot()->access()->north();
+			 break;
+	 case '6':
+		 world->getrobot()->access()->east();
+		 break;
+	 case '2':
+		 world->getrobot()->access()->south();
+		 break;
+	 case '4':
+		 world->getrobot()->access()->west();
+		 break;
+
+
+	 default:
+		 break;
+	 }*/
+
+	};
+ void buttonmaker()
+ {
+	 array<Button^> ^movepad = gcnew array < Button ^ > (4);
+	 for (int i = 0; i < 4; i++)
+	 {
+		 movepad[i] = gcnew Button;
+		 movepad[i]->Location = Point(x, y);
+		 movepad[i]->Parent = this;
+		 movepad[i]->Size = (Drawing::Size(50, 50));
+		movepad[i]->Click += gcnew System::EventHandler(this, &Myform::Clicked);
+		movepad[i]->Font = (gcnew System::Drawing::Font(L"Microsoft Bell MT", 40, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+			static_cast<System::Byte>(0)));
+
+
+	 }
+
+ }
+}
