@@ -2,6 +2,7 @@
 #include "World.h"
 #include "Robot.h"
 #include "Cell.h"
+#include "RobotLocation.h"
 
 namespace KTRproject {
 
