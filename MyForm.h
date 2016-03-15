@@ -1,4 +1,7 @@
 #pragma once
+#include "World.h"
+#include "Robot.h"
+#include "Cell.h"
 
 namespace KTRproject {
 
@@ -15,6 +18,7 @@ namespace KTRproject {
 	public ref class MyForm : public System::Windows::Forms::Form
 	{
 	public:
+		
 		MyForm(void)
 		{
 			InitializeComponent();
@@ -36,7 +40,23 @@ namespace KTRproject {
 		}
 
 	private:
-		/// <summary>
+		World^ world;
+
+		Graphics^ g;
+		Brush^ grayBrush;
+		Brush^ whiteBrush;
+		Brush^ burlyBrush;
+		Brush^ paleTurquoiseBrush;
+
+		Pen^ blackPen;
+
+		//Static constants
+		/*static const int NUMROWS = 16;
+		static const int NUMCOLS = 20;*/
+		static const int CELLSIZE = 25;
+	private: System::Windows::Forms::Panel^  panel1;
+	private: System::Windows::Forms::Button^  button1;
+			 /// <summary>
 		/// Required designer variable.
 		/// </summary>
 		System::ComponentModel::Container ^components;
@@ -48,26 +68,57 @@ namespace KTRproject {
 		/// </summary>
 		void InitializeComponent(void)
 		{
-			this->components = gcnew System::ComponentModel::Container();
-			this->Size = System::Drawing::Size(300,300);
-			this->Text = L"MyForm";
-			this->Padding = System::Windows::Forms::Padding(0);
+			this->panel1 = (gcnew System::Windows::Forms::Panel());
+			this->button1 = (gcnew System::Windows::Forms::Button());
+			this->SuspendLayout();
+			// 
+			// panel1
+			// 
+			this->panel1->Location = System::Drawing::Point(20, 19);
+			this->panel1->Name = L"panel1";
+			this->panel1->Size = System::Drawing::Size(246, 224);
+			this->panel1->TabIndex = 0;
+			// 
+			// button1
+			// 
+			this->button1->Location = System::Drawing::Point(130, 269);
+			this->button1->Name = L"button1";
+			this->button1->Size = System::Drawing::Size(78, 63);
+			this->button1->TabIndex = 1;
+			this->button1->Text = L"button1";
+			this->button1->UseVisualStyleBackColor = true;
+			this->button1->Click += gcnew System::EventHandler(this, &MyForm::button1_Click);
+			// 
+			// MyForm
+			// 
+			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
+			this->ClientSize = System::Drawing::Size(374, 368);
+			this->Controls->Add(this->button1);
+			this->Controls->Add(this->panel1);
+			this->Name = L"MyForm";
+			this->Text = L"MyForm";
 			this->Load += gcnew System::EventHandler(this, &MyForm::MyForm_Load);
+			this->ResumeLayout(false);
+
 		}
 #pragma endregion
-
-		void direction(int, int);
+		/*
+		void direction(int, int);*/
 
 	private: System::Void MyForm_Load(System::Object^  sender, System::EventArgs^  e) {
+
+		void buttonmaker();
+		g = panel1->CreateGraphics();
+		world = gcnew World();
+		
+
+
 	}
-			 void buttonmaker();
-
-
-	};
+	/*
 	bool access()
 	{
-
+		
 	}
 
 	void position()
@@ -76,7 +127,7 @@ namespace KTRproject {
 
 
 
-	}
+	}*/
 
 	/*void direction(int, int) {
 		char north = '8', south = '2', east = '6', west = '4';
@@ -107,7 +158,7 @@ namespace KTRproject {
 			MessageBox::Show("New direction");
 
 		}
-*/
+
 		/*switch (startdirection)
 		{
 		case '8':
@@ -126,12 +177,12 @@ namespace KTRproject {
 
 		default:
 		break;
-		}*/
+		}
 
-	}
+	}*/
 	void buttonmaker()
 	{
-		array<Button^> ^movepad = gcnew array < Button ^ >(4);											
+		/*array<Button^> ^movepad = gcnew array < Button ^ >(4);											
 		int x = 50;
 		int y = 50;
 
@@ -150,10 +201,10 @@ namespace KTRproject {
 		}
 		x = 50;
 		y += 100;
-
+		*/
 	}
 	System::Void Clicked(System::Object^ sender, System::EventArgs^ e) 
-	{
+	{/*
 		Button^ button = dynamic_cast<Button^>(sender);
 
 		char direction;
@@ -180,8 +231,21 @@ namespace KTRproject {
 		{
 			MessageBox::Show("New direction");
 
-		}
+		}*/
 	}
 
-	};
+	private: System::Void button1_Click(System::Object^  sender, System::EventArgs^  e) {
+		//creating robot, using cheese icon as placeholder
+		int x, y;
+		Drawing::Icon^ robot = gcnew System::Drawing::Icon("cheese.ico");
+
+		int robotRow = 3;
+		int robotCol = 3;
+
+		x = robotCol * CELLSIZE;
+		y = robotRow * CELLSIZE;
+		Rectangle robotRect = Rectangle(x, y, CELLSIZE, CELLSIZE);
+		g->DrawIcon(robot, robotRect);
+	}
+};
 }
