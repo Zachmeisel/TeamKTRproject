@@ -41,6 +41,7 @@ namespace KTRproject {
 
 	private:
 		World^ world;
+		RobotLocation^ robotLoc();
 
 		Graphics^ g;
 		Brush^ grayBrush;
@@ -70,7 +71,28 @@ namespace KTRproject {
 		{
 			this->panel1 = (gcnew System::Windows::Forms::Panel());
 			this->button1 = (gcnew System::Windows::Forms::Button());
+			this->Move = (gcnew System::Windows::Forms::Button());
+			this->Turn = (gcnew System::Windows::Forms::Button());
 			this->SuspendLayout();
+			// 
+			// Move
+			// 
+			this->Move->Location = System::Drawing::Point(547, 71);
+			this->Move->Name = L"Move";
+			this->Move->Size = System::Drawing::Size(85, 46);
+			this->Move->TabIndex = 0;
+			this->Move->Text = L"Move";
+			this->Move->UseVisualStyleBackColor = true;
+			this->Move->Click += gcnew System::EventHandler(this, &MyForm::Move_Click);
+			// 
+			// Turn
+			// 
+			this->Turn->Location = System::Drawing::Point(649, 71);
+			this->Turn->Name = L"Turn";
+			this->Turn->Size = System::Drawing::Size(90, 46);
+			this->Turn->TabIndex = 1;
+			this->Turn->Text = L"Turn";
+			this->Turn->UseVisualStyleBackColor = true;
 			// 
 			// panel1
 			// 
@@ -115,123 +137,48 @@ namespace KTRproject {
 
 
 	}
-	/*
-	bool access()
+	private: System::Void Move_Click(System::Object^  sender, System::EventArgs^  e) 
 	{
+		//test if open or a beaper in it
+		//move 
+
+		if (beaperaccess() == true && robotacces() == true) {
+			move();
+
+		}
+
+
+
+	}
+	bool robotacces()
+	{
+		//direction comes from file
+		if (direction == 'r') {
+			if (world->getRobot()->getCol() < world->NUMCOLS - 1) return false;
+		}
+		else if (direction == 'l') {
+			if (world->getRobot()->getCol() > 0) return false;
+		}
+		else if (direction == 'u') {
+			if (world->getRobot()->getRow() > 0) return false;
+		}
 		
+		return true;
 	}
 
-	void position()
+	void move()
 	{
-		int col, row;
+		world->getWorld()[r, c];
+
+		int x = robotLoc.getcol();
+		int y = robotLoc.getrow();
 
 
-
-	}*/
-
-	/*void direction(int, int) {
-		char north = '8', south = '2', east = '6', west = '4';
-		char startdirection;
-
-		std::cin >> startdirection;
-
-		if (startdirection == north && access() == true)
-		{
-			gonorth();
-
-		}
-		else if (startdirection == west && access() == true) {
-			gowest();
-		}
-		else if (startdirection == south && access() == true)
-		{
-			gosouth();
-
-		}
-		else if (startdirection == east && access() == true)
-		{
-			goeast();
-
-		}
-		else
-		{
-			MessageBox::Show("New direction");
-
-		}
-
-		/*switch (startdirection)
-		{
-		case '8':
-		world->getrobot()->access()->north();
-		break;
-		case '6':
-		world->getrobot()->access()->east();
-		break;
-		case '2':
-		world->getrobot()->access()->south();
-		break;
-		case '4':
-		world->getrobot()->access()->west();
-		break;
-
-
-		default:
-		break;
-		}
-
-	}*/
-	void buttonmaker()
-	{
-		/*array<Button^> ^movepad = gcnew array < Button ^ >(4);											
-		int x = 50;
-		int y = 50;
-
-		for (int i = 0; i < 4; i++)
-		{
-			movepad[i] = gcnew Button;
-			movepad[i]->Location = Point(x, y);
-			movepad[i]->Parent = this;
-			movepad[i]->Size = (Drawing::Size(50, 50));
-			movepad[i]->Click += gcnew System::EventHandler(this, &MyForm::Clicked);
-			movepad[i]->Font = (gcnew System::Drawing::Font(L"Microsoft Bell MT", 40, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(0)));
-
-			x += 100;
-
-		}
-		x = 50;
-		y += 100;
-		*/
+		//testing next cell to get acess before moving 
+		if (x++)
 	}
-	System::Void Clicked(System::Object^ sender, System::EventArgs^ e) 
-	{/*
-		Button^ button = dynamic_cast<Button^>(sender);
 
-		char direction;
-
-		if (direction == north && access() == true)
-		{
-			gonorth();
-
-		}
-		else if (direction == west && access() == true) {
-			gowest();
-		}
-		else if (direction == south && access() == true)
-		{
-			gosouth();
-
-		}
-		else if (direction == east && access() == true)
-		{
-			goeast();
-
-		}
-		else
-		{
-			MessageBox::Show("New direction");
-
-		}*/
+	
 	}
 
 	private: System::Void button1_Click(System::Object^  sender, System::EventArgs^  e) {
