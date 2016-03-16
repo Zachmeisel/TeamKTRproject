@@ -42,7 +42,7 @@ namespace KTRproject {
 
 	private:
 		World^ world;
-		RobotLocation^ robotLoc();
+		Robot^ robot();
 
 		Graphics^ g;
 		Brush^ grayBrush;
@@ -129,9 +129,8 @@ namespace KTRproject {
 		/*
 		void direction(int, int);*/
 
-	private: System::Void MyForm_Load(System::Object^  sender, System::EventArgs^  e) {
-
-		void buttonmaker();
+	private: System::Void MyForm_Load(System::Object^  sender, System::EventArgs^  e) 
+    {
 		g = panel1->CreateGraphics();
 		world = gcnew World();
 		
@@ -169,17 +168,15 @@ namespace KTRproject {
 
 	void move()
 	{
-		world->getWorld()[r, c];
+		World->getGrid()[row, col];
 
-		int x = robotLoc.getcol();
-		int y = robotLoc.getrow();
+		int c = robot.getcol();
+		int r = robot.getrow();
 
 
 		//testing next cell to get acess before moving 
-		if (x++)
-	}
-
-	
+		
+        
 	}
 
 	private: System::Void button1_Click(System::Object^  sender, System::EventArgs^  e) {
