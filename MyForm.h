@@ -5,9 +5,7 @@
 #include "Cell.h"
 <<<<<<< HEAD
 #include "fileParse.h"
-=======
 
->>>>>>> cc93f936f7991440622be3e47b317485d496eff8
 
 namespace KTRproject {
 
@@ -93,17 +91,15 @@ namespace KTRproject {
 			this->button1->UseVisualStyleBackColor = true;
 			// 
 			// panel1
-			// 
-<<<<<<< HEAD
-		    this->panel1->Location = System::Drawing::Point(35, 26);
+
+			 this->panel1->Location = System::Drawing::Point(35, 26);
 			this->panel1->Margin = System::Windows::Forms::Padding(2);
 			this->panel1->Name = L"panel1";
-			this->panel1->Size = System::Drawing::Size(400, 400);
-=======
+
 			this->panel1->Location = System::Drawing::Point(28, 32);
 			this->panel1->Name = L"panel1";
 			this->panel1->Size = System::Drawing::Size(583, 288);
->>>>>>> cc93f936f7991440622be3e47b317485d496eff8
+
 			this->panel1->TabIndex = 0;
 			this->panel1->Paint += gcnew System::Windows::Forms::PaintEventHandler(this, &MyForm::panel1_Paint);
 			// 
@@ -141,7 +137,7 @@ int cellWidth, cellHeight;
         commands = parse->parsingComs();
         numofCommands = parse->getnumberofCom();
         int args = 5;
-        /*
+        
         
        //loop to initlize wolrdWidth and wolrdHeight
         
@@ -152,7 +148,7 @@ int cellWidth, cellHeight;
             worldWidth = commands[u][1] - '0';
             worldHeight = commands[u][2] - '0';
             }
-        } */
+        } 
         world = gcnew array<Cell^, 2> (worldWidth, worldHeight);
         cellWidth = panel->Width / worldWidth;
         cellHeight = panel->Height / worldHeight;
@@ -188,13 +184,13 @@ int cellWidth, cellHeight;
 	
 
 	}
-<<<<<<< HEAD
+
     
-    /*
-	bool robotacces()
-=======
+    
+
+
 	/*bool robotacces()
->>>>>>> cc93f936f7991440622be3e47b317485d496eff8
+
 	{
 		//direction comes from file
 		if (direction == 'r') {
@@ -208,12 +204,9 @@ int cellWidth, cellHeight;
 		}
 		
 		return true;
-<<<<<<< HEAD
+
 	}
-*/
-=======
-	}*/
->>>>>>> cc93f936f7991440622be3e47b317485d496eff8
+	*/
 
 	private: System::Void button1_Click(System::Object^  sender, System::EventArgs^  e) {
 		//creating robot, using cheese icon as placeholder
