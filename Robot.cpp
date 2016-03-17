@@ -13,9 +13,9 @@ Robot::Robot(int newDir, int newBeep, int newRow, int newCol) : Item(newRow,newC
 void Robot::setIcon()
 {
     
-    robotup = gcnew System::Drawing::Icon("robotup.icon");
-    robotright = gcnew System::Drawing::Icon("robotright.icon");
-    robotleft = gcnew System::Drawing::Icon("robotleft.icon");
+    robotup = gcnew System::Drawing::Icon("robotup.ico");
+    robotright = gcnew System::Drawing::Icon("robotright.ico");
+    robotleft = gcnew System::Drawing::Icon("robotleft.ico");
     icon = 0;
 }
 System::Drawing::Icon^ Robot::getIcon()

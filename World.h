@@ -7,7 +7,7 @@ ref class World
 {
 private:
 	//Beeper^ myBeeper;
-	//Robot^ myRobot;
+	Robot^ myRobot;
 	array <Cell^, 2>^ grid;
 public:
 	static const int NUMROWS = 8;
@@ -31,6 +31,6 @@ public:
 		}
 	};
 	//Beeper^ getBeeper() { return myBeeper; };
-	//Robot^ getRobot() { return myRobot; };
+	Robot^ getRobot() { return myRobot; };
 	array <Cell^, 2>^ getGrid() { return grid; };
 };
