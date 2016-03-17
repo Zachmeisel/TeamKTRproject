@@ -2,7 +2,7 @@
 #include "World.h"
 #include "Robot.h"
 #include "Cell.h"
-#include "RobotLocation.h"
+#include "fileParse.h"
 
 namespace KTRproject {
 
@@ -43,7 +43,9 @@ namespace KTRproject {
 	private:
 		World^ world;
 		Robot^ robot();
-
+        fileParse *parse;
+        char **commands;
+       
 		Graphics^ g;
 		Brush^ grayBrush;
 		Brush^ whiteBrush;
@@ -97,10 +99,13 @@ namespace KTRproject {
 			// 
 			// panel1
 			// 
-			this->panel1->Location = System::Drawing::Point(20, 19);
+		    this->panel1->Location = System::Drawing::Point(35, 26);
+			this->panel1->Margin = System::Windows::Forms::Padding(2);
 			this->panel1->Name = L"panel1";
-			this->panel1->Size = System::Drawing::Size(246, 224);
+			this->panel1->Size = System::Drawing::Size(400, 400);
 			this->panel1->TabIndex = 0;
+			this->panel1->Paint += gcnew System::Windows::Forms::PaintEventHandler(this, &MyForm::panel1_Paint);
+			// 
 			// 
 			// button1
 			// 
@@ -126,21 +131,78 @@ namespace KTRproject {
 
 		}
 #pragma endregion
+int numofCommands;
+int lineofCommand = 0;
+int worldWidth, worldHeight;
+int cellWidth, cellHeight;
 		
 
 	private: System::Void MyForm_Load(System::Object^  sender, System::EventArgs^  e) 
     {
 		g = panel1->CreateGraphics();
 		world = gcnew World();
-		
-
-
+        initalize();
 	}
+    
+    
+    // initalize all varibale form text file using fileParse object
+    
+    private: System::Void initalize()
+    {
+        parse = gcnew fileParse();
+        
+        commands = parse->parsingComs();
+        numofCommands = parse->getnumberofCom();
+        int args = 5;
+        /*
+        
+       //loop to initlize wolrdWidth and wolrdHeight
+        
+        for (int u = 0; u < numofCommands; u++)
+        {
+            if (tolower(commands[u][0] == 'world'))
+            {
+            worldWidth = commands[u][1] - '0';
+            worldHeight = commands[u][2] - '0';
+            }
+        } */
+        world = gcnew array<Cell^, 2> (worldWidth, worldHeight);
+        cellWidth = panel->Width / worldWidth;
+        cellHeight = panel->Height / worldHeight;
+        
+        
+        for (int q = 0; q < worldWidth; q++)
+        {
+            for(int k = 0; k < worldHeight; k++)
+            {
+                world[q,k] = gcnew Cell(q,w);
+            }
+        }
+        
+        
+        for (int i = 0; i < numofCommands; i++)
+        {
+            for(int j = 0; j < args; j++;)
+            {
+                if (commands[i][j] == 'wall'){
+                     world[commands[i][j + 1] - '0', commands[i][j+3] - '0']->setWalls(command[i][j+3] - '0');
+                } else if (commands[i][j] == 'beeper'){
+                     world[commands[i][j + 1] - '0', commands[i][j+2] - '0']->setBeeper(int)(command[i][j+3] - '0');
+                } else  if (commands[i][j] == 'robot'){
+                    robot = gcnew Robot(command[i][j+1] - '0', commands[i][j+2] - '0', commands[i][j+3] - '0', commands[i][j+4]-'0');
+                }
+                
+            }
+        }
+        
+    }
 	private: System::Void Move_Click(System::Object^  sender, System::EventArgs^  e) 
 	{
 	
 
 	}
+    
+    /*
 	bool robotacces()
 	{
 		//direction comes from file
@@ -156,6 +218,7 @@ namespace KTRproject {
 		
 		return true;
 	}
+*/
 
 	private: System::Void button1_Click(System::Object^  sender, System::EventArgs^  e) {
 		//creating robot, using cheese icon as placeholder

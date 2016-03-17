@@ -12,10 +12,12 @@ private:
     const std::string FILENAME = ""//file name when we get one
     int numberofCom;
 
+
 public:
     file();
     int getNumLines(); //gets number of line is file
-    char **parse(); //parse through file and stores commands
-    int getnumberofCom(); 
+    char **parsingComs(); //parse through file and stores commands
+    int getnumberofCom(); //gets the number of commands
+    
     
 };

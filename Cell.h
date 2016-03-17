@@ -5,25 +5,32 @@ private:
 	//Date Memebers;
 	int row;
 	int col;
-	bool access;
-	bool hasBeeper;
+    int beeperCount;
+	bool hasBeeper = false;
+    bool moveUp = true;
+    bool moveDown = true;
+    bool moveLeft = true;
+    bool moveRight = true;
 
 public:
-	//Default Constructor
-	/*
-	Cell(void) {};*/
 
-public:
 	//Initializing Constructor
-	Cell(int r, int c, bool a) {};
+	Cell(int, int) {};
 
 	//Accessors 
-	bool getAccess() { return access; }
-	int getRow() { return row; }
-	int getCol() { return col; }
-	bool getBeeper() { return hasBeeper; }
+	int getRow();
+	int getCol();
+    int getBeepers();
+	
 
 	//Mutators 
-	void setAccess(bool a) { access = a; }
-	void setBeeper(bool beeper) { hasBeeper = true; }
+    void setWall(int);
+    void setBeeper(int);
+    bool canmoveUp();
+    bool canmoveRight();
+    bool canmoveDown();
+    bool canmoveLeft();
+
+    
+    
 };

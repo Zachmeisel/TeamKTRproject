@@ -16,7 +16,8 @@ public:
 
     void Robot::setIcon() override;
    
-    Robot(int,int,int,int);
+   
+    Robot(int,int,int,int); //default constructor 
     
     void turnLeft();
     void move();
