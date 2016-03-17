@@ -1,0 +1,4 @@
+World 5 7
+Beepers 2 6 1
+Robot 2 2 3 0
+Wall 2 3 1
