@@ -126,8 +126,7 @@ namespace KTRproject {
 
 		}
 #pragma endregion
-		/*
-		void direction(int, int);*/
+		
 
 	private: System::Void MyForm_Load(System::Object^  sender, System::EventArgs^  e) 
     {
@@ -139,15 +138,7 @@ namespace KTRproject {
 	}
 	private: System::Void Move_Click(System::Object^  sender, System::EventArgs^  e) 
 	{
-		//test if open or a beaper in it
-		//move 
-
-		if (beaperaccess() == true && robotacces() == true) {
-			move();
-
-		}
-
-
+	
 
 	}
 	bool robotacces()
@@ -164,19 +155,6 @@ namespace KTRproject {
 		}
 		
 		return true;
-	}
-
-	void move()
-	{
-		World->getGrid()[row, col];
-
-		int c = robot.getcol();
-		int r = robot.getrow();
-
-
-		//testing next cell to get acess before moving 
-		
-        
 	}
 
 	private: System::Void button1_Click(System::Object^  sender, System::EventArgs^  e) {

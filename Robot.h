@@ -8,34 +8,23 @@ protected:
 	static System::Drawing::Icon^ robotup;
 	static System::Drawing::Icon^ robotright;
 	static System::Drawing::Icon^ robotleft;
+    int dir, beep, row, col;
 
 public:
-	Robot(void) { setIcon(); }
-    
-    Robot(int row, int col);
-
+	Robot(void) { setIcon(); } 
 	System::Drawing::Icon^ RobotLocation::getIcon();
 
-void Robot::setIcon()override;
-
-	void robotup() 
-    {
-        row--;
-        icon = 2;   
-	}
-	void robotright() 
-    {
-         col ++;
-         icon =0;
-	}
-	void robotleft() 
-    {
-        col--;
-        icon = 1;
-        
-	}
-	
-
-
+    void Robot::setIcon() override;
+   
+    Robot(int,int,int,int);
+    
+    void turnLeft();
+    void move();
+    void placeBeeper();
+    void pickBeeper();
+    int getRow();
+    int getCol();
+    int getbeepercount();
+    int getDirc();
 
 };
