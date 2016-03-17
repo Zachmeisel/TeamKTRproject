@@ -1,8 +1,9 @@
 #pragma once
+#include "Item.h"
 #include "World.h"
 #include "Robot.h"
 #include "Cell.h"
-#include "RobotLocation.h"
+
 
 namespace KTRproject {
 
@@ -58,6 +59,8 @@ namespace KTRproject {
 		static const int CELLSIZE = 25;
 	private: System::Windows::Forms::Panel^  panel1;
 	private: System::Windows::Forms::Button^  button1;
+	private: System::Windows::Forms::Button^  button2;
+	private: System::Windows::Forms::Panel^  panel2;
 			 /// <summary>
 		/// Required designer variable.
 		/// </summary>
@@ -70,58 +73,32 @@ namespace KTRproject {
 		/// </summary>
 		void InitializeComponent(void)
 		{
-			this->panel1 = (gcnew System::Windows::Forms::Panel());
 			this->button1 = (gcnew System::Windows::Forms::Button());
-			this->Move = (gcnew System::Windows::Forms::Button());
-			this->Turn = (gcnew System::Windows::Forms::Button());
+			this->panel1 = (gcnew System::Windows::Forms::Panel());
 			this->SuspendLayout();
-			// 
-			// Move
-			// 
-			this->Move->Location = System::Drawing::Point(547, 71);
-			this->Move->Name = L"Move";
-			this->Move->Size = System::Drawing::Size(85, 46);
-			this->Move->TabIndex = 0;
-			this->Move->Text = L"Move";
-			this->Move->UseVisualStyleBackColor = true;
-			this->Move->Click += gcnew System::EventHandler(this, &MyForm::Move_Click);
-			// 
-			// Turn
-			// 
-			this->Turn->Location = System::Drawing::Point(649, 71);
-			this->Turn->Name = L"Turn";
-			this->Turn->Size = System::Drawing::Size(90, 46);
-			this->Turn->TabIndex = 1;
-			this->Turn->Text = L"Turn";
-			this->Turn->UseVisualStyleBackColor = true;
-			// 
-			// panel1
-			// 
-			this->panel1->Location = System::Drawing::Point(20, 19);
-			this->panel1->Name = L"panel1";
-			this->panel1->Size = System::Drawing::Size(246, 224);
-			this->panel1->TabIndex = 0;
 			// 
 			// button1
 			// 
-			this->button1->Location = System::Drawing::Point(130, 269);
+			this->button1->Location = System::Drawing::Point(116, 344);
 			this->button1->Name = L"button1";
-			this->button1->Size = System::Drawing::Size(78, 63);
-			this->button1->TabIndex = 1;
-			this->button1->Text = L"button1";
+			this->button1->Size = System::Drawing::Size(311, 63);
+			this->button1->TabIndex = 0;
+			this->button1->Text = L"button2";
 			this->button1->UseVisualStyleBackColor = true;
-			this->button1->Click += gcnew System::EventHandler(this, &MyForm::button1_Click);
+			// 
+			// panel1
+			// 
+			this->panel1->Location = System::Drawing::Point(28, 32);
+			this->panel1->Name = L"panel1";
+			this->panel1->Size = System::Drawing::Size(583, 288);
+			this->panel1->TabIndex = 0;
 			// 
 			// MyForm
 			// 
-			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
-			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(374, 368);
-			this->Controls->Add(this->button1);
+			this->ClientSize = System::Drawing::Size(637, 436);
 			this->Controls->Add(this->panel1);
+			this->Controls->Add(this->button1);
 			this->Name = L"MyForm";
-			this->Text = L"MyForm";
-			this->Load += gcnew System::EventHandler(this, &MyForm::MyForm_Load);
 			this->ResumeLayout(false);
 
 		}
@@ -141,7 +118,7 @@ namespace KTRproject {
 	
 
 	}
-	bool robotacces()
+	/*bool robotacces()
 	{
 		//direction comes from file
 		if (direction == 'r') {
@@ -155,20 +132,56 @@ namespace KTRproject {
 		}
 		
 		return true;
-	}
+	}*/
 
 	private: System::Void button1_Click(System::Object^  sender, System::EventArgs^  e) {
 		//creating robot, using cheese icon as placeholder
 		int x, y;
-		Drawing::Icon^ robot = gcnew System::Drawing::Icon("cheese.ico");
+		Drawing::Icon^ beeper = gcnew System::Drawing::Icon("beeper.ico");
+		
 
 		int robotRow = 3;
 		int robotCol = 3;
+		
+		//direction = 'r';
+
+		x = robotCol * CELLSIZE;
+		y = robotRow * CELLSIZE;
+		Rectangle beeperRect = Rectangle(x, y, CELLSIZE, CELLSIZE);
+		g->DrawIcon(beeper, beeperRect);
+
+		//world->getRobot()->MoveTo(robotRow, robotCol);
 
 		x = robotCol * CELLSIZE;
 		y = robotRow * CELLSIZE;
 		Rectangle robotRect = Rectangle(x, y, CELLSIZE, CELLSIZE);
-		g->DrawIcon(robot, robotRect);
+		g->DrawIcon(world->getRobot()->getIcon(), robotRect);
+
+		drawWorld();
+	}
+
+	private: void drawWorld() {
+		//Declare local variables;
+		//		int row, col;
+		int x, y;
+
+		//Refresh the panel
+		panel1->Refresh();
+
+		Drawing::Icon^ street = gcnew System::Drawing::Icon("street.ico");
+
+		//Draw the empty maze
+		for (int row = 0; row < world->NUMROWS; row++)
+		{
+			for (int col = 0; col < world->NUMCOLS; col++)
+			{
+				x = col * CELLSIZE;
+				y = row * CELLSIZE;
+				Rectangle gridRect = Rectangle(x, y, CELLSIZE - 1, CELLSIZE - 1);
+				g->DrawIcon(street, gridRect);
+				g->DrawRectangle(blackPen, gridRect);
+			}
+		}
 	}
 };
 }

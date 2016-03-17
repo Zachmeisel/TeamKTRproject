@@ -12,7 +12,7 @@ protected:
 
 public:
 	Robot(void) { setIcon(); } 
-	System::Drawing::Icon^ RobotLocation::getIcon();
+	System::Drawing::Icon^ RobotLocation::getIcon() override;
 
     void Robot::setIcon() override;
    
