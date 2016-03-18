@@ -15,7 +15,7 @@ private:
 public:
 
 	//Initializing Constructor
-	Cell(int, int) {};
+	Cell(int, int);
 
 	//Accessors 
 	int getRow();
@@ -24,7 +24,7 @@ public:
 	
 
 	//Mutators 
-    void setWall(int);
+    void setWalls(int);
     void setBeeper(int);
     bool canmoveUp();
     bool canmoveRight();
