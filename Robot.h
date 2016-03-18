@@ -11,21 +11,24 @@ protected:
     int dir, beep, row, col;
 
 public:
-	Robot(void) { setIcon(); } 
+	Robot(void);
+    Robot(int,int,int,int); //default constructor 
 	System::Drawing::Icon^ Robot::getIcon() override;
 
     void Robot::setIcon() override;
    
-   
-    Robot(int,int,int,int); //default constructor 
-    
-    void turnLeft();
+     
+    //Mutators
     void move();
+    void turnLeft();
     void placeBeeper();
     void pickBeeper();
+    
+     //Accessors 
     int getRow();
     int getCol();
     int getbeepercount();
     int getDirc();
+ 
 
 };

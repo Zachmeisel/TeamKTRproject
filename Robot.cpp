@@ -16,7 +16,9 @@ void Robot::setIcon()
     robotup = gcnew System::Drawing::Icon("robotup.ico");
     robotright = gcnew System::Drawing::Icon("robotright.ico");
     robotleft = gcnew System::Drawing::Icon("robotleft.ico");
+    robootdown = gcnew System::Drawing::Icon("robotDown.ico");
     icon = 0;
+   
 }
 System::Drawing::Icon^ Robot::getIcon()
 {
@@ -25,10 +27,11 @@ System::Drawing::Icon^ Robot::getIcon()
         return robotright;
     else if (icon == 1)
         return robotleft;
-	else (icon == 2);
-	{
+	else if (icon == 2);
 		return robotup;
-	}
+    else 
+        retunr robotdown;
+	
             
 }
 
@@ -38,26 +41,37 @@ void Robot::move()
     {
         case 1:
             col--;
+            icon = 1;
             break;
         case 2:
             row++;
+            icon = 3;
             break;
         case 3:
             col++;
+            icon = 0;
             break;
         case 4:
             row--;
+            icon = 2;
             break;   
     }
 }
-
-void Robot::pickBeeper()
+void Robot::turnLeft()
 {
-    beep++;
+    if (dir = 1)
+         dir = 4;
+    else 
+          dir--;
 }
+
 void Robot::placeBeeper()
 {
     beep--;
+}
+void Robot::pickBeeper()
+{
+    beep++;
 }
 int Robot::getRow()
 {
@@ -66,13 +80,6 @@ int Robot::getRow()
 int Robot::getCol()
 {
     return col;
-}
-void Robot::turnLeft()
-{
-    if (dir = 1)
-         dir = 4;
-    else 
-          dir--;
 }
 int Robot::getbeepercount()
 {

@@ -26,10 +26,17 @@ public:
 	//Mutators 
     void setWalls(int);
     void setBeeper(int);
+    
     bool canmoveUp();
     bool canmoveRight();
     bool canmoveDown();
     bool canmoveLeft();
+    
+    /*
+    Pen ^wall = gcnew Pen(Color::Black);
+    void Walls(Graphics^ ,Rectangle^);
+    void DrawCell(Graphics^, Rectangle^);
+    */
 
     
     

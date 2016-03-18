@@ -25,7 +25,33 @@ void Cell::setWalls(int w)
                 break;
       }  
     }
+    /*
+    void Cell::Walls(Graphics^ g, Rectangle^ rec)
+    {
+        if (!moveDown)
+        {
+            g->DrawLine(wall, rec->Left,rec->Bottom,rec->Right,rec->Bottom);
+        }
+        if(!moveLeft)
+        {
+            g->DrawLine(wall, rec->Left,rec->Top,rec->Left, rec->Bottom);
+        }
+        if(!moveUp)
+        {
+            g->DrawLine(wall,rec->Left, rec->Top,rec->Right, rec->Top);
+        }
+        if(!moveRight)
+        {
+            g->DrawLine(wall, rec->Right,rec->Top,rec->Right,rec->Bottom)
+        }
+    }
     
+    void Cell::DrawCells(Graphics^ g, Rectangle^ rec)
+    {
+        g->FillRectangle(cellColor,rec->X,rec->Y,rec->Width, rec->Height);
+        Walls(g,rec);
+    }
+   */ 
     void Cell::setBeeper(int b)
     {
         beeperCount = b;
