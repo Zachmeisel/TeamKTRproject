@@ -4,7 +4,7 @@ Robot::Robot(int newDir, int newBeep, int newRow, int newCol) : Item(newRow,newC
 {
     setIcon();
     dir = newDir;
-    beep = NewBeep;
+    beep = newBeep;
     row = newRow;
     col = newCol;
    
@@ -20,12 +20,16 @@ void Robot::setIcon()
 }
 System::Drawing::Icon^ Robot::getIcon()
 {
+	
     if (icon == 0)
         return robotright;
     else if (icon == 1)
         return robotleft;
-    else (icon == 2)
-        return robotup;        
+	else (icon == 2);
+	{
+		return robotup;
+	}
+            
 }
 
 void Robot::move()
@@ -74,7 +78,7 @@ int Robot::getbeepercount()
 {
     return beep;
 }
-int getDirc()
+int Robot::getDirc()
 {
     return dir;
 }
