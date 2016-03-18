@@ -83,6 +83,11 @@ namespace KTRproject {
 			this->panel1->Name = L"panel1";
 			this->panel1->Size = System::Drawing::Size(583, 288);
 			this->panel1->TabIndex = 0;
+            //
+            // timer1
+            this->timer1->Enabled = true;
+			this->timer1->Interval = 1000;
+			this->timer1->Tick += gcnew System::EventHandler(this, &MyForm::timer1_Tick);
 			// 
 			// MyForm
 			// 
@@ -94,10 +99,10 @@ namespace KTRproject {
 		}
 #pragma endregion
 int numofCommands;
-int lineofCommand = 0;
+int comline = 0;
 int worldWidth, worldHeight;
 int cellWidth, cellHeight;
-World^ world;
+//World^ world;
 Robot^ robot;
 fileParse *parse;
 char **commands;
@@ -133,7 +138,7 @@ char **commands;
             worldHeight = commands[u][2] - '0';
             }
         } 
-        array <Cell^,2>^ world = gcnew array<Cell^, 2> (worldWidth, worldHeight);
+        world = gcnew array<Cell^, 2> (worldWidth, worldHeight);
         cellWidth = panel1->Width / worldWidth;
         cellHeight = panel1->Height / worldHeight;
         
@@ -215,5 +220,100 @@ char **commands;
 			}
 		}
 	}
+    private: System::Void timer1_Tick(System::Object^  sender, System::EventArgs^  e) {
+        comline++;
+        if(comline < numofCommands)
+        {
+            if(commands[comline][0] == 'm')
+            {
+                switch (robot->getDirc()){
+                    case 1:
+                    //not the top
+                    //Checks for wall ahead(up) or if the next cell behind(down) is open
+                            if(robot->getCol() != 0)
+                                {
+                                if(world[robot->getRow(),robot->getCol]->canmoveUp() &&
+                                    wolrd[robot->getRow(),getCol() - 1]->canmoveDown())
+                                    {
+                                        robot->move();
+                                    } 
+                            }
+                    break;
+                    
+                    case 2:
+                    //not at right side
+                    //Checks for wall to the right or if the next cell to the left is open
+                            if (robot->getRow() != worldWidth)
+                                {
+                                if(world[robot->getRow(),robot->getCol]->canmoveRight() &&
+                                    wolrd[robot->getRow(),getCol() + 1]->canmoveLeft())
+                                    {
+                                        robot->move();
+                                    }
+                            }
+                    
+                    break;
+                    
+                    case 3:
+                    //not at bottom 
+                    //checks for wall behind(down) or if the cell ahead is open(up)
+                            if (robot->getCol != wolrdHeight)
+                                {
+                                if(world[robot->getRow(),robot->getCol]->canmoveDown() &&
+                                    wolrd[robot->getRow(),getCol() + 1]->canmoveUp())
+                                    {
+                                        robot->move();
+                                    }   
+                                }
+                    break;
+                    
+                    case 4:
+                    //not at left side 
+                    //cheack for wall to the left or if the next cell to the right is open
+                            if (robot->getRow() != 0)
+                                {
+                                if(world[robot->getRow(),robot->getCol]->canmoveLeft() &&
+                                    wolrd[robot->getRow(),getCol() - 1]->canmoveRight())
+                                    {
+                                        robot->move();
+                                    }   
+                                }
+                    break;
+                }
+            }
+            if (commands[comline][0] = 'left')
+            {
+                robot->turnleft();
+            }
+            if(commands[comline][0] == 'pick')
+            {
+                if(world[k->getRow(),robot->getCol()]->getBeeper() > 0)
+                    {
+                        robot->pickBeeper();
+                        wolrd[robot->getRow(),robot->getCol()]->setBeeper
+                        (world[roobot->getRow(),robot->getCol]->getBeeper() - 1);
+                    }
+            }
+            if(commands[comline][0] == 'place')
+            {
+                if(robot->getbeeperCount() > 0)
+                    {
+                        robot->placeBeeper();
+                        wolrd[robot->getRow(0,robot->getCol())]->setBeeper
+                        (world[robot->getRow(),robot->getCol()]->getBeepers() + 1);
+                    }
+            }
+            if(commands[curmine][0] == 'off')
+            {
+                timer1->stop();
+            }
+            
+            
+ 
+        }
+        Message::Box("Number of Beeper in Karel's Bag is" + robot->getbeeperCount());
+        drawWorld();
+    }
+    
 };
 }
