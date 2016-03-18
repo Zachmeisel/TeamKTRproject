@@ -1,13 +1,13 @@
 #include "Cell.h"
 
-using namespaces System::Drawing;
+using namespace System::Drawing;
  
 Cell::Cell(int r , int c)
 {
     row = r;
-    col = r;
+    col = c;
 }
- void setWall(int w)
+void Cell::setWalls(int w)
     {
       switch(w)
       {
@@ -53,7 +53,7 @@ Cell::Cell(int r , int c)
     {
         return beeperCount;
     }
-    int getRow()
+    int Cell::getRow()
     { return row; }
-	int getCol() 
+	int Cell::getCol() 
     { return col; }
