@@ -3,7 +3,7 @@
 #include "World.h"
 #include "Robot.h"
 #include "Cell.h"
-<<<<<<< HEAD
+
 #include "fileParse.h"
 
 
@@ -44,11 +44,7 @@ namespace KTRproject {
 		}
 
 	private:
-		World^ world;
-		Robot^ robot();
-        fileParse *parse;
-        char **commands;
-       
+	
 		Graphics^ g;
 		Brush^ grayBrush;
 		Brush^ whiteBrush;
@@ -62,7 +58,7 @@ namespace KTRproject {
 		static const int NUMCOLS = 20;*/
 		static const int CELLSIZE = 25;
 	private: System::Windows::Forms::Panel^  panel1;
-	private: System::Windows::Forms::Button^  button1;
+
 	private: System::Windows::Forms::Button^  button2;
 	private: System::Windows::Forms::Panel^  panel2;
 			 /// <summary>
@@ -77,38 +73,21 @@ namespace KTRproject {
 		/// </summary>
 		void InitializeComponent(void)
 		{
-			this->button1 = (gcnew System::Windows::Forms::Button());
 			this->panel1 = (gcnew System::Windows::Forms::Panel());
 			this->SuspendLayout();
 			// 
-			// button1
-			// 
-			this->button1->Location = System::Drawing::Point(116, 344);
-			this->button1->Name = L"button1";
-			this->button1->Size = System::Drawing::Size(311, 63);
-			this->button1->TabIndex = 0;
-			this->button1->Text = L"button2";
-			this->button1->UseVisualStyleBackColor = true;
-			// 
 			// panel1
-
-			 this->panel1->Location = System::Drawing::Point(35, 26);
+			// 
+			this->panel1->Location = System::Drawing::Point(28, 32);
 			this->panel1->Margin = System::Windows::Forms::Padding(2);
 			this->panel1->Name = L"panel1";
-
-			this->panel1->Location = System::Drawing::Point(28, 32);
-			this->panel1->Name = L"panel1";
 			this->panel1->Size = System::Drawing::Size(583, 288);
-
 			this->panel1->TabIndex = 0;
-			this->panel1->Paint += gcnew System::Windows::Forms::PaintEventHandler(this, &MyForm::panel1_Paint);
-			// 
 			// 
 			// MyForm
 			// 
-			this->ClientSize = System::Drawing::Size(637, 436);
+			this->ClientSize = System::Drawing::Size(736, 427);
 			this->Controls->Add(this->panel1);
-			this->Controls->Add(this->button1);
 			this->Name = L"MyForm";
 			this->ResumeLayout(false);
 
@@ -118,12 +97,17 @@ int numofCommands;
 int lineofCommand = 0;
 int worldWidth, worldHeight;
 int cellWidth, cellHeight;
+World^ world;
+Robot^ robot;
+fileParse *parse;
+char **commands;
+
 		
 
 	private: System::Void MyForm_Load(System::Object^  sender, System::EventArgs^  e) 
     {
 		g = panel1->CreateGraphics();
-		world = gcnew World();
+		
         initalize();
 	}
     
@@ -132,9 +116,9 @@ int cellWidth, cellHeight;
     
     private: System::Void initalize()
     {
-        parse = gcnew fileParse();
+        parse = new fileParse();
         
-        commands = parse->parsingComs();
+        commands = parse->parsingCom();
         numofCommands = parse->getnumberofCom();
         int args = 5;
         
@@ -143,70 +127,44 @@ int cellWidth, cellHeight;
         
         for (int u = 0; u < numofCommands; u++)
         {
-            if (tolower(commands[u][0] == 'world'))
+            if (tolower(commands[u][0] == 'wor'))
             {
             worldWidth = commands[u][1] - '0';
             worldHeight = commands[u][2] - '0';
             }
         } 
-        world = gcnew array<Cell^, 2> (worldWidth, worldHeight);
-        cellWidth = panel->Width / worldWidth;
-        cellHeight = panel->Height / worldHeight;
+        array <Cell^,2>^ world = gcnew array<Cell^, 2> (worldWidth, worldHeight);
+        cellWidth = panel1->Width / worldWidth;
+        cellHeight = panel1->Height / worldHeight;
         
         
         for (int q = 0; q < worldWidth; q++)
         {
             for(int k = 0; k < worldHeight; k++)
             {
-                world[q,k] = gcnew Cell(q,w);
+                world[q,k] = gcnew Cell(q,k);
             }
         }
         
         
         for (int i = 0; i < numofCommands; i++)
         {
-            for(int j = 0; j < args; j++;)
+            for(int j = 0; j < args; j++)
             {
                 if (commands[i][j] == 'wall'){
-                     world[commands[i][j + 1] - '0', commands[i][j+3] - '0']->setWalls(command[i][j+3] - '0');
-                } else if (commands[i][j] == 'beeper'){
-                     world[commands[i][j + 1] - '0', commands[i][j+2] - '0']->setBeeper(int)(command[i][j+3] - '0');
-                } else  if (commands[i][j] == 'robot'){
-                    robot = gcnew Robot(command[i][j+1] - '0', commands[i][j+2] - '0', commands[i][j+3] - '0', commands[i][j+4]-'0');
+                     world[commands[i][j + 1] - '0', commands[i][j+3] - '0']->setWalls(commands[i][j+3] - '0');
+                } else if (commands[i][j] == 'bee'){
+                     world[commands[i][j + 1] - '0', commands[i][j+2] - '0']->setBeeper(commands[i][j+3] - '0');
+                } else  if (commands[i][j] == 'rob'){
+                    robot = gcnew Robot(commands[i][j+1] - '0', commands[i][j+2] - '0', commands[i][j+3] - '0', commands[i][j+4]-'0');
                 }
                 
             }
         }
         
     }
-	private: System::Void Move_Click(System::Object^  sender, System::EventArgs^  e) 
-	{
-	
-
-	}
-
-    
-    
 
 
-	/*bool robotacces()
-
-	{
-		//direction comes from file
-		if (direction == 'r') {
-			if (world->getRobot()->getCol() < world->NUMCOLS - 1) return false;
-		}
-		else if (direction == 'l') {
-			if (world->getRobot()->getCol() > 0) return false;
-		}
-		else if (direction == 'u') {
-			if (world->getRobot()->getRow() > 0) return false;
-		}
-		
-		return true;
-
-	}
-	*/
 
 	private: System::Void button1_Click(System::Object^  sender, System::EventArgs^  e) {
 		//creating robot, using cheese icon as placeholder
@@ -245,9 +203,9 @@ int cellWidth, cellHeight;
 		Drawing::Icon^ street = gcnew System::Drawing::Icon("street.ico");
 
 		//Draw the empty maze
-		for (int row = 0; row < world->NUMROWS; row++)
+		for (int row = 0; row < world->wHeight; row++)
 		{
-			for (int col = 0; col < world->NUMCOLS; col++)
+			for (int col = 0; col < world->wWidth; col++)
 			{
 				x = col * CELLSIZE;
 				y = row * CELLSIZE;
